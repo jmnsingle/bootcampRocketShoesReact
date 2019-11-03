@@ -1,24 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter , Router } from 'react-router-dom';
+// Deixa o Store disponível em toda a aplicação
+import { Provider } from 'react-redux';
+// Exibe mensagem na tela
+import { ToastContainer } from 'react-toastify';
+
+import './config/reactotronConfig';
+
+import GlobalStyle from './styles/global';
+
+import Routes from './routes';
+import Header from './components/Header';
+
+import history from './services/history';
+import store from './store';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Provider store={store}>
+        <Router history={history}>
+          <ToastContainer autoClose={3000} />
+          <GlobalStyle />
+          <Header />
+          <Routes />
+        </Router>
+      </Provider>
     </div>
   );
 }
